@@ -1,0 +1,27 @@
+version: '2'
+services:
+
+  graylog:
+    image: registry.cn-hangzhou.aliyuncs.com/yangyuanpeng/graylog:3.1
+    volumes:
+      - /TRS/APP/graylog/graylog_journal:/usr/share/graylog/data/journal
+    environment:
+      - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
+      - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+ #     - GRAYLOG_HTTP_EXTERNAL_URI=http://graylog.devdemo.trs.net.cn/
+      - GRAYLOG_HTTP_BIND_ADDRESS=graylog.devdemo.trs.net.cn:9001
+      - GRAYLOG_ROOT_TIMEZONE=Asia/Shanghai
+      - GRAYLOG_MONGODB_URI=mongodb://192.168.200.118/graylog
+      - GRAYLOG_ELASTICSEARCH_HOSTS=http://192.168.200.118:9201
+    ports:
+#      - 9000:9000
+      - 1514:1514
+      - 1514:1514/udp
+      - 12201:12201
+      - 12201:12201/udp
+      - 5044:5044
+      - 5045:5045
+      - 5046:5046
+      - 5047:5047
+      - 12900:12900
+    network_mode: "host"
